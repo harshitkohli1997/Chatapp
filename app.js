@@ -7,7 +7,7 @@ const app = express();
 //setting up socket io
 const socketIO = require('socket.io'); 
 var io = socketIO(server);
-
+app.use(express.static("."))
 // Handlebars Middleware
 app.engine('handlebars', exphbs({
     defaultLayout: 'main'
@@ -27,8 +27,16 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
 console.log('new user connected');
 
+socket.on('newMessage', (newmessage) => {
+  console.log(`message from `,newmessage );
+})
+socket.emit('createMessage', {
+  text: 'hello how are you',
+ createAt:'dasd'
+});
+
 socket.on('disconnect', () => {
-  console.log('user was diconnected');
+  console.log('user was disconnected')
 })
 })
 server.listen(port, () => {
