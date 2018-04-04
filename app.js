@@ -27,18 +27,20 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
 console.log('new user connected');
 
-socket.on('newMessage', (newmessage) => {
-  console.log(`message from `,newmessage );
-})
-socket.emit('createMessage', {
-  text: 'hello how are you',
- createAt:'dasd'
+socket.on('createMessage', (message) => {
+  console.log(`message from `,message );
+  io.emit('newMessage', {
+  from :message.from,
+  text :message.text,
+  createAt: new Date().getTime()
+  });
 });
+
 
 socket.on('disconnect', () => {
   console.log('user was disconnected')
 })
-})
+ });
 server.listen(port, () => {
     console.log(`server started on port ${port}`)
 })
