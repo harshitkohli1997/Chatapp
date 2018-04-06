@@ -6,7 +6,9 @@ const http = require('http');
 const app = express();
  var server = http.createServer(app);
 //setting up socket io
-const socketIO = require('socket.io'); 
+const socketIO = require('socket.io');
+
+const { generateMessage } = require('./server/utils/message')
 var io = socketIO(server);
 app.use(express.static("."))
 // Handlebars Middleware
@@ -28,27 +30,13 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
 console.log('new user connected');
 
-socket.emit('newMessage', {
-  from : 'admin',
-text: 'welcome to chat room',
-createAt: new Date().getTime()
-
-});
-socket.broadcast.emit('newMessage', {
-from: ' admin ',
-text: 'new user connected',
-createAt: new Date().getTime()
-
-});
+socket.emit('newMessage',generateMessage('admin', 'welcome to chat room'));
+socket.broadcast.emit('newMessage', generateMessage( 'admin', 'new user connected'));
 socket.on('createMessage', (message) => {
   console.log(`message from `,message );
  // ### io emits the event to all the user including the one who sends it  ###
 
-  io.emit('newMessage', {  
-  from :message.from,
-  text :message.text,
-  createAt: new Date().getTime()
-  });
+  io.emit('newMessage', generateMessage(message.from,message.text));
  // ### where as socket.broadcast emit event to all but except the one who sends it###
 //  socket.broadcast.emit('newMessage',{
 //     from: message.from,
