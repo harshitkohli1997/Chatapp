@@ -14,3 +14,11 @@ socket.on('disconnect', () => {
 socket.on('newMessage', (message) => {
     console.log('message is',message);
 })
+
+socket.emit('createMessage', {
+  from:'abc',
+  text:'hi'
+},
+() => {
+  console.log('message sent');
+});
