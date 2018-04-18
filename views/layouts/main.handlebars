@@ -14,14 +14,19 @@
 <body>
   <div class="container">
   <h1>welcome to chatApp</h1></div>
-  <form id="message-from">
+
+<ol id = "messages"></ol>
+  <form id="message-form">
     <div class="abc">
-    <input name = "message" type="text" placeholder="Message">
-    <button>Submit</button>
+    <input name = "message" type="text" placeholder="Message"/>
+    <button>send</button>
   </div>
   </form>
 <script src="/socket.io/socket.io.js"></script>
+<script type = 'text/javascript' src="../../js/libs/jquery-3.3.1.min.js"></script>
 
+
+</script>
 <script type="text/javascript" src="../../js/index.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
