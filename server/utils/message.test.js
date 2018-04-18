@@ -8,8 +8,8 @@ describe('generateMessage', () => {
    var text = 'some message';
    var message = generateMessage( from, text);
     
-   expect(message.createAt).toBeA('number');
-   expect(message).toInclude({from,text});
+   expect(typeof message.createAt).toBe('number');
+   expect(message).toMatchObject({from,text});
     //store res in value
     //assert from match
     //assert text match
