@@ -29,6 +29,6 @@ socket.emit('createMessage', {
 text: jQuery('[name=message]').val()
 
 }, () => {
-console.log('sent');
+console.log('message sent');
 }) ;
 });
