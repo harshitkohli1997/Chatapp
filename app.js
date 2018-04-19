@@ -39,9 +39,6 @@ socket.emit('newMessage',generateMessage('admin', 'welcome to chat room'));
 socket.broadcast.emit('newMessage', generateMessage( 'admin', 'new user connected'));
 socket.on('createMessage', (message, callback) => {
   console.log(`message from `,message );
- 
- // ### io emits the event to all the user including the one who sends it  ###
-
   io.emit('newMessage', generateMessage(message.from,message.text));
   callback();
  // ### where as socket.broadcast emit event to all but except the one who sends it###
@@ -50,6 +47,11 @@ socket.on('createMessage', (message, callback) => {
 //     text: message.text,
 //     createAt: new Date().getTime()
 //  })
+});
+
+ // ### io emits the event to all the user including the one who sends it  ###
+ socket.on('createLocationMessage', (coords) => {
+  io.emit('newMessage', generateMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
 });
 
 

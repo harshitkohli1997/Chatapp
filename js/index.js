@@ -1,48 +1,44 @@
-
 var socket = io();
-socket.on('connect', () => {
-  console.log('connected to server');
 
-  // socket.on('welcome', () => {
-  //   console.log(`${from}`)
-  // })
-
-});
-socket.on('disconnect', () => {
-  console.log('disconnected from server');
+socket.on('connect', function () {
+  console.log('Connected to server');
 });
 
-socket.on('newMessage', (message) => {
-    console.log('message is',message);
-    //using jquery to create modify and make element visible
-    var li = jQuery('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
-    jQuery('#messages').append(li);
-})
+socket.on('disconnect', function () {
+  console.log('Disconnected from server');
+});
 
+socket.on('newMessage', function (message) {
+  console.log('newMessage', message);
+  var li = jQuery('<li></li>');
+  li.text(`${message.from}: ${message.text}`);
 
-//selecting the from and overwriting its it behaviour
-jQuery('#message-form').on('submit',  (e) =>{
+  jQuery('#messages').append(li);
+});
+
+jQuery('#message-form').on('submit', function (e) {
   e.preventDefault();
-socket.emit('createMessage', {
-  from:'scooby',
-text: jQuery('[name=message]').val()
 
-}, () => {
-console.log('message sent');
-}) ;
+  socket.emit('createMessage', {
+    from: 'User',
+    text: jQuery('[name=message]').val()
+  }, function () {
+
+  });
 });
 
-locationButton = jQuery('#send-location');
-locationButton.on('click', () => {
-  if(!navigator.geolocation)
-  {
-    return alert('Geolocation not supported by your browser');
+var locationButton = jQuery('#send-location');
+locationButton.on('click', function () {
+  if (!navigator.geolocation) {
+    return alert('Geolocation not supported by your browser.');
   }
-  navigator.geolocation.getCurrentPosition((position ) => {
-     console.log(position);
-  }, () => {
-    alert('Unable to fetch location');
-  })
 
-})
+  navigator.geolocation.getCurrentPosition(function (position) {
+    socket.emit('createLocationMessage', {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    });
+  }, function () {
+    alert('Unable to fetch location.');
+  });
+});
