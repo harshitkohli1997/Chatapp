@@ -32,3 +32,17 @@ text: jQuery('[name=message]').val()
 console.log('message sent');
 }) ;
 });
+
+locationButton = jQuery('#send-location');
+locationButton.on('click', () => {
+  if(!navigator.geolocation)
+  {
+    return alert('Geolocation not supported by your browser');
+  }
+  navigator.geolocation.getCurrentPosition((position ) => {
+     console.log(position);
+  }, () => {
+    alert('Unable to fetch location');
+  })
+
+})
