@@ -42,9 +42,9 @@ locationButton.on('click', function () {
   if (!navigator.geolocation) {
     return alert('Geolocation not supported by your browser.');
   }
-locationButton.attr('disabled','disabled')
+locationButton.attr('disabled', 'disabled').text('Sending location...')
   navigator.geolocation.getCurrentPosition(function (position) {
-    locationButton.removeAttr('disabled');
+    locationButton.removeAttr('disabled').text('Send Location');
     socket.emit('createLocationMessage', {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude
