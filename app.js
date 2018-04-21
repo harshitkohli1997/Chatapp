@@ -13,7 +13,7 @@ const socketIO = require('socket.io');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const { generateMessage } = require('./server/utils/message')
+const { generateMessage ,generateLocationMessage} = require('./server/utils/message')
 var io = socketIO(server);
 app.use(express.static("."))
 // Handlebars Middleware
@@ -51,7 +51,7 @@ socket.on('createMessage', (message, callback) => {
 
  // ### io emits the event to all the user including the one who sends it  ###
  socket.on('createLocationMessage', (coords) => {
-  io.emit('newMessage', generateMessage('Admin', `${coords.latitude}, ${coords.longitude}`));
+  io.emit('newLocationMessage', generateLocationMessage('Admin',coords.latitude ,coords.longitude));
 });
 
 
