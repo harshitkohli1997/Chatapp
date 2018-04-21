@@ -11,19 +11,28 @@
   <title>ChatApp</title>
 </head>
 
-<body>
-  <div class="container">
-  <h1>welcome to chatApp</h1></div>
-
-<ol id = "messages"></ol>
-  <form id="message-form">
-    <div class="abc">
-    <input name = "message" type="text" placeholder="Message"/>
-    <button>send</button>
+<body class="chat">
+  
+  <div class="chat__sidebar">
+<h3>People</h3>
+<div id="users"></div>
   </div>
+  <div class="chat__main">
+<ol id = "messages" class="chat__messages"></ol>
+  <div class="chat__footer">
+ <form id="message-form">
+   
+  <input name = "message" type="text" placeholder="Message"/>
+    <button>send</button>
   </form>
   <br> <br>
-  <div class="container"><button id = "send-location">Send Location</button></div>
+  <button id = "send-location">Send Location</button>
+
+  </div>
+  </div>
+ 
+
+
 <script src="/socket.io/socket.io.js"></script>
 <script type = 'text/javascript' src="../../js/libs/jquery-3.3.1.min.js"></script>
 
