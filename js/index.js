@@ -9,17 +9,14 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (message) {
- var template = jQuery('#message-template').html();
+  var formattedTime = moment(message.createAt).format('h:mm a')
+  var template = jQuery('#message-template').html();
  var html =Mustache.render(template, {
-   text: message.text
+   text: message.text,
+   from: message.from,
+   createAt:formattedTime
  });
  jQuery('#messages').append(html);
-  // var formattedTime = moment(message.createAt).format('h:mm a')
-  // console.log('newMessage', message);
-  // var li = jQuery('<li></li>');
-  // li.text(`${message.from} ${formattedTime}: ${message.text}`);
-
-  // jQuery('#messages').append(li);
 });
 
 socket.on('newLocationMessage', function (message) {

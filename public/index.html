@@ -31,8 +31,15 @@
   </div>
   </div>
  <script id="message-template" type = "text/template">
- <p>{{text}}</p>
-
+ <li class ="message">
+ <div class ="message__title">
+     <h4>{{from}}</h4>
+     <span>{{createAt}}</span>
+ </div>
+ <div class = "message__body">
+     <p>{{text}}</p>
+ </div>
+</li>
 
  </script>
 

@@ -37,8 +37,8 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
 console.log('new user connected');
 
-socket.emit('newMessage',generateMessage('admin', 'welcome to chat room'));
-socket.broadcast.emit('newMessage', generateMessage( 'admin', 'new user connected'));
+socket.emit('newMessage',generateMessage('Admin', 'welcome to chat room'));
+socket.broadcast.emit('newMessage', generateMessage( 'Admin', 'new user connected'));
 socket.on('createMessage', (message, callback) => {
   console.log(`message from `,message );
   io.emit('newMessage', generateMessage(message.from,message.text));
