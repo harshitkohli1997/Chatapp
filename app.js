@@ -17,17 +17,19 @@ const { generateMessage ,generateLocationMessage} = require('./server/utils/mess
 var io = socketIO(server);
 app.use(express.static("."))
 // Handlebars Middleware
-app.engine('handlebars', exphbs({
-    defaultLayout: 'main'
-  }));
-  app.set('view engine', 'handlebars');
+// app.engine('handlebars', exphbs({
+//     defaultLayout: 'main'
+//   }));
+//   app.set('view engine', 'handlebars');
+// Static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 
   app.get('/' , (req,res) => {
-    res.render('layouts/main');
+    res.render('indexn');
   })
 
-  // Static folder
-app.use(express.static(path.join(__dirname, 'public')));
+  
 
 //setting server
 const port = process.env.PORT || 5000;
