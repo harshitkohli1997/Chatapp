@@ -25,9 +25,9 @@ app.use(express.static("."))
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-  app.get('/' , (req,res) => {
-    res.render('indexn');
-  })
+  // app.get('/' , (req,res) => {
+  //   res.render('indexasasd');
+  // })
 
   
 
