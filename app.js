@@ -42,7 +42,10 @@ socket.emit('newMessage',generateMessage('Admin', 'welcome to chat room'));
 socket.broadcast.emit('newMessage', generateMessage( 'Admin', 'new user connected'));
 
 socket.on('join', (params,callback) => {
-  
+  if(!isRealString(params.name) || !isRealString(params.room)){
+    callback('Name and room name are required ');
+  }
+  callback();
 });
 socket.on('createMessage', (message, callback) => {
   console.log(`message from `,message );
