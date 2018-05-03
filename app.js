@@ -4,6 +4,7 @@ const exphbs  = require('express-handlebars');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const {isRealString} = require('./server/utils/validation')
 const app = express();
  var server = http.createServer(app);
 //setting up socket io
@@ -39,6 +40,10 @@ console.log('new user connected');
 
 socket.emit('newMessage',generateMessage('Admin', 'welcome to chat room'));
 socket.broadcast.emit('newMessage', generateMessage( 'Admin', 'new user connected'));
+
+socket.on('join', (params,callback) => {
+  
+});
 socket.on('createMessage', (message, callback) => {
   console.log(`message from `,message );
   io.emit('newMessage', generateMessage(message.from,message.text));
