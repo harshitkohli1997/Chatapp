@@ -38,13 +38,17 @@ const port = process.env.PORT || 5000;
 io.on('connection', (socket) => {
 console.log('new user connected');
 
-socket.emit('newMessage',generateMessage('Admin', 'welcome to chat room'));
-socket.broadcast.emit('newMessage', generateMessage( 'Admin', 'new user connected'));
 
 socket.on('join', (params,callback) => {
   if(!isRealString(params.name) || !isRealString(params.room)){
     callback('Name and room name are required ');
   }
+  //joining particular room
+  socket.join(params.room);
+  //io.emit -> io.to(room name here)
+  //socket.broadcast -> socket.broadcast.to(room name).emit
+  socket.emit('newMessage',generateMessage('Admin', 'welcome to chat room'));
+socket.broadcast.to(params.room).emit('newMessage', generateMessage( 'Admin', `${params.name} has joined`));
   callback();
 });
 socket.on('createMessage', (message, callback) => {
