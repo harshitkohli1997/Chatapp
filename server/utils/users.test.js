@@ -2,6 +2,25 @@ const expect = require('expect');
 
 const {Users} = require('./users');
 
+beforeEach( () => {
+    users = new Users();
+    users.users = [{
+        id : '1',
+        name: 'shweta',
+        room: 'phd prep'
+    },
+    {
+        id : '2',
+        name: 'hk',
+        room: 'web'
+    },
+    {
+        id : '3',
+        name: 'heena',
+        room: 'toyota'
+    }]
+})
+
 describe('Users', () => {
     it('should add new user', () => {
         var users = new Users()

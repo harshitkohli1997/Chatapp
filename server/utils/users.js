@@ -13,6 +13,21 @@ class Users {
        this.users.push(user);
        return user;
     }
+    removeUSer (id ) {
+        //return user that was removed
+    }
+    getUser (id) {
+
+    }
+    getUserList (room) {
+        var users = this.users.filter(( user )=> {
+   return user.room === room;
+        });
+        var namesArray = users.map((user) => {
+           return user.name;
+           return namesArray;
+        });
+    }
 }
 
 module.exports = {Users};
